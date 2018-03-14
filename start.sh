@@ -14,7 +14,7 @@ if [ ! -f ".env" ]; then
     php artisan migrate:install
     php artisan migrate --force
     composer dump-autoload
-    php artisan db:seed --class=AdminSeeder
+    php artisan db:seed --class=AdminSeeder --force
     php artisan geoip:update
 
     rm -f AdminSeeder_withoutEnv.php
