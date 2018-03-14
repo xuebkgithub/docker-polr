@@ -7,9 +7,9 @@ if [ ! -f ".env" ]; then
 
     envsubst < ".env_polr" > ".env"
 
-    php artisan key:generate
-    php artisan migrate:install
-    php artisan migrate
+    php artisan key:generate --force
+    php artisan migrate:install --force
+    php artisan migrate --force
 fi
 
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
