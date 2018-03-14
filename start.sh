@@ -10,7 +10,7 @@ if [ ! -f ".env" ]; then
 
     envsubst < ".env_polr" > ".env"
 
-    php artisan migrate:install --force
+    php artisan migrate:install
     php artisan migrate --force
 fi
 
