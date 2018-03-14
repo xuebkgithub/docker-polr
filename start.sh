@@ -1,12 +1,11 @@
 #!/bin/sh
 
+cd /src
 if [ ! -f ".env" ]; then
-    cd /src
-
     POLR_GENERATED_AT=`date +"%B %d, %Y"`
     export POLR_GENERATED_AT
 
-    envsubst < ".env.setup" > ".env"
+    envsubst < ".env_polr" > ".env"
 
     php artisan key:generate
     php artisan migrate:install
