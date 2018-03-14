@@ -46,7 +46,7 @@ WORKDIR /src
 RUN composer install --no-dev -o
 
 # Copy env file and setup values
-COPY config/.env .env
+COPY config/.env_polr .env
 
 # Removing now useless dependency
 RUN apk del git
