@@ -48,7 +48,7 @@ RUN composer install --no-dev -o
 # Setting logs permissions
 RUN mkdir -p storage/logs && \
     touch storage/logs/lumen.log && \
-    chmod -R go+w storage/logs
+    chmod -R go+w storage
 
 # Copy env file and setup values
 COPY config/.env_polr .env_polr
