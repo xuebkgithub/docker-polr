@@ -15,7 +15,7 @@ ENV DB_USERNAME polr
 # Install packages
 RUN apk --no-cache add gettext git php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
-    php7-mbstring php7-gd nginx supervisor curl
+    php7-mbstring php7-gd php-xmlwriter nginx supervisor curl
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -27,6 +27,10 @@ COPY config/php.ini /etc/php7/conf.d/zzz_custom.ini
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Copy start.sh script
+COPY start.sh /start.sh
+RUN chmod u+x /start.sh
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer \
     | php -- --install-dir=/usr/local/bin --filename=composer
@@ -34,24 +38,18 @@ RUN curl -sS https://getcomposer.org/installer \
 # Pull application
 RUN mkdir -p /src && \
     git clone https://github.com/cydrobolt/polr.git /src && \
-    chown -R www-data:www-data /src
+    chown -R nginx:nginx /src
 
 WORKDIR /src
 
 # Install dependencies
 RUN composer install --no-dev -o
 
-# Copy setup.sh script
-COPY setup_env.sh setup_env.sh
-
 # Copy env file and setup values
 COPY config/.env .env
-RUN ./setup_env.sh && \
-    php artisan key:generate && \
-    php artisan migrate
 
-# Removing now useless dependencies
-RUN apk del gettext git
+# Removing now useless dependency
+RUN apk del git
 
 EXPOSE 80
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT ["/start.sh"]
