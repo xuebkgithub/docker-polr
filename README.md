@@ -6,7 +6,12 @@ Usage
 -----
 Start the Docker container:
 
-    docker run -p 80:80 ajanvier/polr
+    docker run -p 80:80 \
+        -e "DB_HOST=localhost" \
+        -e "DB_DATABASE=polr" \
+        -e "DB_USERNAME=polr" \
+        -e "DB_PASSWORD=password" \
+        ajanvier/polr
 
 Environment variables
 -----
@@ -38,6 +43,7 @@ Environment variables
 | POLR_ALLOW_ACCT_CREATION |  |
 | POLR_ACCT_ACTIVATION |  |
 | POLR_ACCT_CREATION_RECAPTCHA |  |
+| POLR_BASE | 32 or 62 *(default: 62)* |
 | POLR_RECAPTCHA_SITE_KEY |  |
 | POLR_RECAPTCHA_SECRET_KEY |  |
 |  |  |
