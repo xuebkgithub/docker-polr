@@ -41,7 +41,8 @@ RUN mkdir -p /src && \
     git clone https://github.com/cydrobolt/polr.git /src
 
 # Setting logs permissions
-RUN chmod go+w storage/logs
+RUN mkdir -p storage/logs && \
+    chmod go+w storage/logs
 
 WORKDIR /src
 
