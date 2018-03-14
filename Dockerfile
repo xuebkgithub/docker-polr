@@ -14,7 +14,7 @@ ENV DB_USERNAME polr
 ENV POLR_BASE 62
 
 # Install packages
-RUN apk --no-cache add gettext git php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
+RUN apk --no-cache add gettext git php7 php7-fpm php7-pdo php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
     php7-mbstring php7-gd php7-xmlwriter nginx supervisor curl
 
@@ -39,6 +39,9 @@ RUN curl -sS https://getcomposer.org/installer \
 # Pull application
 RUN mkdir -p /src && \
     git clone https://github.com/cydrobolt/polr.git /src
+
+# Setting logs permissions
+RUN chmod go+w storage/logs
 
 WORKDIR /src
 
