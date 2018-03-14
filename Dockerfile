@@ -34,7 +34,7 @@ RUN curl -sS https://getcomposer.org/installer \
 # Pull application
 RUN mkdir -p /src && \
     git clone https://github.com/cydrobolt/polr.git /src && \
-    chown -R www-data:www-data /src && \
+    chown -R www-data:www-data /src
 
 WORKDIR /src
 
