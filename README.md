@@ -1,5 +1,8 @@
 Docker Polr on Alpine Linux
 ==============================================
+![Docker Build Status](https://img.shields.io/docker/build/ajanvier/polr.svg)
+![Docker Image Size](https://img.shields.io/microbadger/image-size/ajanvier/polr.svg)
+
 A Docker image for [Polr](https://github.com/cydrobolt/polr).
 
 Usage
@@ -21,7 +24,7 @@ Environment variables
 | DB_PORT | Port of the MySQL server *(default: 3306)* |
 | DB_DATABASE | Name of the MySQL database *(default: polr)* |
 | DB_USERNAME | Name of the MySQL user *(default: polr)* |
-| DB_PASSWORD | **required** Password of the MySQL user |
+| DB_PASSWORD | **(required)** Password of the MySQL user |
 |  |  |
 | APP_NAME | *(default: My Polr)* |
 | APP_PROTOCOL | *(default: https://)* |
