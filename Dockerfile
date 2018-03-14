@@ -40,14 +40,14 @@ RUN curl -sS https://getcomposer.org/installer \
 RUN mkdir -p /src && \
     git clone https://github.com/cydrobolt/polr.git /src
 
-# Setting logs permissions
-RUN mkdir -p storage/logs && \
-    chmod go+w storage/logs
-
 WORKDIR /src
 
 # Install dependencies
 RUN composer install --no-dev -o
+
+# Setting logs permissions
+RUN mkdir -p storage/logs && \
+    chmod go+w storage/logs
 
 # Copy env file and setup values
 COPY config/.env_polr .env
