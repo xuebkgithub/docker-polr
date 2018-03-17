@@ -7,7 +7,6 @@ LABEL Maintainer="Aurélien JANVIER <dev@ajanvier.fr>" \
 # Environment variables
 ENV APP_NAME My Polr
 ENV APP_PROTOCOL https://
-ENV APP_ADDRESS example.com
 ENV DB_PORT 3306
 ENV DB_DATABASE polr
 ENV DB_USERNAME polr
