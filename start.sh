@@ -9,14 +9,17 @@ if [ ! -f ".env" ]; then
     export APP_KEY
 
     envsubst < ".env_polr" > ".env"
-    envsubst < "AdminSeeder_withoutEnv.php" > "database/seeds/AdminSeeder.php"
 
     php artisan migrate:install
     php artisan migrate --force
     composer dump-autoload
-    php artisan db:seed --class=AdminSeeder --force
     php artisan geoip:update
+fi
 
+if [ ! -f "database/seeds/AdminSeeder.php" ]; then
+    envsubst < "AdminSeeder_withoutEnv.php" > "database/seeds/AdminSeeder.php"
+    
+    php artisan db:seed --class=AdminSeeder --force
     rm -f AdminSeeder_withoutEnv.php
 fi
 

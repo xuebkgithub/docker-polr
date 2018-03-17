@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
+use App\Helpers\UserHelper;
 use App\Factories\UserFactory;
 
 class AdminSeeder extends Seeder
@@ -13,6 +15,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        UserFactory::createUser("${ADMIN_USERNAME}", "${ADMIN_EMAIL}", "${ADMIN_PASSWORD}", 1, "", null, false, "admin");
+        if (!UserHelper::userExists("${ADMIN_USERNAME}"))
+            UserFactory::createUser("${ADMIN_USERNAME}", "${ADMIN_EMAIL}", "${ADMIN_PASSWORD}", 1, "", null, false, "admin");
+        }
     }
 }
