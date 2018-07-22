@@ -10,6 +10,7 @@ if [ ! -f ".env" ]; then
 
     envsubst < ".env_polr" > ".env"
 
+    rm -f .env_polr
     php artisan migrate:install
     php artisan migrate --force
     composer dump-autoload
@@ -18,9 +19,10 @@ fi
 
 if [ ! -f "database/seeds/AdminSeeder.php" ]; then
     envsubst < "AdminSeeder_withoutEnv.php" > "database/seeds/AdminSeeder.php"
-    
-    php artisan db:seed --class=AdminSeeder --force
+
     rm -f AdminSeeder_withoutEnv.php
+    composer dump-autoload
+    php artisan db:seed --class=AdminSeeder --force
 fi
 
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
