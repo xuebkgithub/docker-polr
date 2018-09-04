@@ -1,4 +1,4 @@
-Docker Polr on Alpine Linux
+Polr on Alpine Linux with Docker
 ==============================================
 ![Docker Build Status](https://img.shields.io/docker/build/ajanvier/polr.svg)
 ![Docker Image Size](https://img.shields.io/microbadger/image-size/ajanvier/polr.svg)
