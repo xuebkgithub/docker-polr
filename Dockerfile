@@ -15,7 +15,7 @@ ENV POLR_BASE 62
 # Install packages
 RUN apk --no-cache add gettext git php7 php7-fpm php7-pdo php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
-    php7-mbstring php7-gd php7-xmlwriter php7-tokenizer php7-pdo_mysql php7-memcached nginx supervisor curl
+    php7-mbstring php7-gd php7-xmlwriter php7-tokenizer php7-pdo_mysql php7-memcached nginx supervisor curl bash
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -30,6 +30,10 @@ COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy start.sh script
 COPY start.sh /start.sh
 RUN chmod u+x /start.sh
+
+# Copy wait-for-it.sh
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod u+x /wait-for-it.sh
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer \
@@ -59,4 +63,4 @@ COPY seeders/AdminSeeder.php AdminSeeder_withoutEnv.php
 RUN apk del git
 
 EXPOSE 80
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT /wait-for-it.sh $DB_HOST:$DB_PORT --strict --timeout=120 -- /start.sh
