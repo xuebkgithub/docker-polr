@@ -17,7 +17,7 @@ Start the Docker container:
         -e "APP_ADDRESS=example.com" \
         -e "ADMIN_USERNAME=admin" \
         -e "ADMIN_PASSWORD=admin" \
-        ajanvier/polr
+        baoku/polr:2.2.0
 
 Or use the example docker-compose.yml.
 

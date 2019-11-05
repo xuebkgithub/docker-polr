@@ -1,8 +1,7 @@
-# Forked from TrafeX/docker-php-nginx (https://github.com/TrafeX/docker-php-nginx/)
+FROM alpine:3.10.3
+MAINTAINER baoku.xue <mail@baoku.cn>
 
-FROM alpine:latest
-LABEL Maintainer="Aurélien JANVIER <dev@ajanvier.fr>" \
-      Description="Unofficial Docker image for Polr."
+ENV POLR_VERSION 2.2.0
 
 # Environment variables
 ENV APP_NAME My Polr
@@ -41,7 +40,9 @@ RUN curl -sS https://getcomposer.org/installer \
 
 # Pull application
 RUN mkdir -p /src && \
-    git clone https://github.com/cydrobolt/polr.git /src
+    wget https://github.com/cydrobolt/polr/archive/${POLR_VERSION}.tar.gz && \
+    tar xf ${POLR_VERSION}.tar.gz && \
+    mv ./polr-${POLR_VERSION}/* /src/
 
 WORKDIR /src
 

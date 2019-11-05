@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
     polr:
-        image: ajanvier/polr
+        image: baoku/polr:2.2.0
         container_name: polr
         ports:
             - "80:80"
